@@ -1,49 +1,51 @@
 import Link from 'next/link'
 import Head from 'next/head'
-import ExtLink from './ext-link'
-import { useRouter } from 'next/router'
-import styles from '../styles/header.module.css'
 
-const navItems: { label: string; page?: string; link?: string }[] = [
-  { label: '.Blog', page: '/' },
-  { label: 'Contact', page: '/contact' },
-  { label: 'Site', link: 'https://juniohorniche.com.br' },
-]
-
-const ogImageUrl = 'https://notion-blog.now.sh/og-image.png'
+const ogImageUrl = 'https://github.com/juniohorniche.png'
 
 const Header = ({ titlePre = '' }) => {
-  const { pathname } = useRouter()
-
   return (
-    <header className={styles.header}>
+    <header className="sticky top-0 z-50">
       <Head>
         <title>{titlePre ? `${titlePre} |` : ''} Junio Horniche</title>
-        <meta
-          name="description"
-          content="An example Next.js site using Notion for the blog"
-        />
-        <meta name="og:title" content="My Notion Blog" />
+        <meta name="description" content="A personal blog" />
+        <meta name="og:title" content="Junio Horniche Blog" />
         <meta property="og:image" content={ogImageUrl} />
-        <meta name="twitter:site" content="@_ijjk" />
+        <meta name="twitter:site" content="@juniohorniche" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:image" content={ogImageUrl} />
       </Head>
-      <ul>
-        {navItems.map(({ label, page, link }) => (
-          <li key={label}>
-            {page ? (
-              <Link href={page}>
-                <a className={pathname === page ? 'active' : undefined}>
-                  {label}
-                </a>
-              </Link>
-            ) : (
-              <ExtLink href={link}>{label}</ExtLink>
-            )}
-          </li>
-        ))}
-      </ul>
+      <div className="sticky top-0 z-20 py-2 bg-white md:py-6 md:mb-6 dark:bg-black">
+        <div className="container px-4 mx-auto lg:max-w-4xl flex items-center justify-between">
+          <Link href="/">
+            <a
+              className={
+                'font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase dark:text-white'
+              }
+            >
+              .Blog
+            </a>
+          </Link>
+          <Link href="/contact">
+            <a
+              className={
+                'font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase dark:text-white'
+              }
+            >
+              Contact
+            </a>
+          </Link>
+          <Link href="https://juniohorniche.com.br/">
+            <a
+              className={
+                'font-medium tracking-wider transition-colors text-gray-900 hover:text-sky-500 uppercase dark:text-white'
+              }
+            >
+              site
+            </a>
+          </Link>
+        </div>
+      </div>
     </header>
   )
 }
